@@ -9,11 +9,18 @@ client = OpenAI(
     api_key=AIML_API_KEY,
 )
 
-# ----------- RAP GENERATION -----------
-def generate_rap_response(opponent_rap, num_lines=6, model="gpt-4o"):
+REFERENCE_AUDIO_MAP = {
+    "Hip-hop": "https://tand-dev.github.io/audio-hosting/spinning-head-271171.mp3",
+    "Trap": "https://tand-dev.github.io/audio-hosting/trap-beat.mp3",
+    "Lo-fi": "https://tand-dev.github.io/audio-hosting/lofi-beat.mp3",
+    "Boom Bap": "https://tand-dev.github.io/audio-hosting/boom-bap.mp3",
+}
+
+# --- RAP GENERATION ---
+def generate_rap_response(opponent_rap, num_lines=6, voice_style="aggressive", model="gpt-4o"):
     prompt = f"""
-You are an aggressive, clever, and witty battle rapper. Respond to the opponent's rap creatively with punchlines and tight rhymes ({num_lines} lines).
-Your style should feel natural and ready for a rap battle stage.
+You are a {voice_style.lower()} battle rapper. Respond creatively to the opponent's rap with tight rhymes and punchlines ({num_lines} lines).
+Use the tone/style: {voice_style}.
 
 Opponent's Rap:
 {opponent_rap}
@@ -24,20 +31,17 @@ Your Rap Response:
     response = client.chat.completions.create(
         model=model,
         messages=[
-            {"role": "system", "content": "You are an elite battle rapper skilled in punchlines and rhythm."},
+            {"role": "system", "content": f"You are a {voice_style.lower()} battle rapper."},
             {"role": "user", "content": prompt},
         ],
     )
 
     return response.choices[0].message.content.strip()
 
-# ----------- AUDIO GENERATION -----------
-def generate_rap_audio(rap_response, reference_audio_url=None):
+# --- AUDIO GENERATION ---
+def generate_rap_audio(rap_response, music_style="Hip-hop"):
     url_generate = "https://api.aimlapi.com/v2/generate/audio"
-
-    if reference_audio_url is None:
-        reference_audio_url = "https://tand-dev.github.io/audio-hosting/spinning-head-271171.mp3"
-
+    reference_audio_url = REFERENCE_AUDIO_MAP.get(music_style, REFERENCE_AUDIO_MAP["Hip-hop"])
     prompt = f"##{rap_response}##"
 
     payload = {
@@ -65,7 +69,6 @@ def get_generated_audio_url(headers, generation_id):
 
     while True:
         get_response = requests.get(url_check, params=params, headers=headers)
-
         if get_response.status_code != 200:
             raise Exception(f"Error retrieving generation: {get_response.text}")
 
