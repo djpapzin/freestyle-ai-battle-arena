@@ -2,3 +2,12 @@ streamlit
 openai
 sys
 requests
+pydub
+openai>=1.10.0
+requests>=2.31.0
+streamlit>=1.32.0
+pydub>=0.25.1
+ipython>=8.0.0
+requests
+
+

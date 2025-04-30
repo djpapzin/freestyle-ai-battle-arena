@@ -7,7 +7,7 @@ from utils.openai_utils import generate_rap
 from utils.elevenlabs_utils import text_to_speech_elevenlabs
 
 def generate_beats_lyrics():
-    st.title("🎶 Generate Beats + Lyrics")
+    st.title("🎶 Generate Lyrics")
 
     lyrics_input = st.text_area("Enter your Lyrics:")
 
