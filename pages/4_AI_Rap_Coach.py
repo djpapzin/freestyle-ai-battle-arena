@@ -1,5 +1,12 @@
 import streamlit as st
-from utils.openai_utils import coach_rap
+import os
+import sys
+
+# Add parent directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
+
+# Fix imports for compatibility with different environments
+from openai_utils import coach_rap
 
 def ai_rap_coach():
     st.title("🎤 AI Rap Coach")

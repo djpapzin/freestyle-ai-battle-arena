@@ -1,5 +1,12 @@
 import streamlit as st
-from utils.minimax_utils import (
+import os
+import sys
+
+# Add parent directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
+
+# Fix imports for compatibility with different environments
+from minimax_utils import (
     generate_rap_response,
     generate_rap_audio,
     get_generated_audio_url,

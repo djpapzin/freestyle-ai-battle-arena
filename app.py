@@ -1,4 +1,9 @@
 import streamlit as st
+import os
+import sys
+
+# Add the root directory to Python path to fix module imports
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 def home():
     st.set_page_config(page_title="Freestyle AI Battle Arena", layout="centered")

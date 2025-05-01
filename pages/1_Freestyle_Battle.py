@@ -8,8 +8,9 @@ load_dotenv()
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
 
-from utils.openai_utils import generate_rap
-from utils.openai_utils import analyze_rap
+# Fix imports for compatibility with different environments
+from openai_utils import generate_rap
+from openai_utils import analyze_rap
 
 # Scoring Logic (You can move this to scoring_utils.py if you prefer)
 def score_rap(rap_text):

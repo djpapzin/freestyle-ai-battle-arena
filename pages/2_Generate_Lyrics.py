@@ -3,8 +3,9 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
-from utils.openai_utils import generate_rap
-from utils.elevenlabs_utils import text_to_speech_elevenlabs
+# Fix imports for compatibility with different environments
+from openai_utils import generate_rap
+from elevenlabs_utils import text_to_speech_elevenlabs
 
 def generate_beats_lyrics():
     st.title("🎶 Generate Lyrics")
