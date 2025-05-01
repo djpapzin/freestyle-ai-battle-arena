@@ -52,3 +52,4 @@ coverage.xml
 .DS_Store
 # Windows
 Thumbs.db
+bfg-1.15.0/
