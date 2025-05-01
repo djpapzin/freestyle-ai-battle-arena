@@ -9,5 +9,5 @@ streamlit>=1.32.0
 pydub>=0.25.1
 ipython>=8.0.0
 requests
-
-
+elevenlabs
+python-dotenv
